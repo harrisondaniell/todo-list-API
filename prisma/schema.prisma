@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid()) // UUID as ID
   name      String
   email     String   @unique
   password  String
@@ -16,7 +16,7 @@ model User {
   updatedAt DateTime @updatedAt
   tasks     Task[]
 
-  @@map("users") // Database table name
+  @@map("users")
 }
 
 model Task {
@@ -24,9 +24,9 @@ model Task {
   title       String
   description String?
   completed   Boolean  @default(false)
-  userId      Int
+  userId      String
   createdAt   DateTime @default(now())
   user        User     @relation(fields: [userId], references: [id])
 
-  @@map("tasks") // Database table name
+  @@map("tasks")
 }
