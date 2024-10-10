@@ -17,20 +17,53 @@ export const createTaskRepositorry = async (data) => {
   return task;
 };
 
-export const getAllTasksByUserId = async (userId) => {
+export const getAllTasksByUserIdRepository = async (userId) => {
   const tasks = await prisma.task.findMany({
     where: {
       userId,
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      user: true,
+      completed: true,
+      createdAt: true,
+      userId: true,
     },
   });
   return tasks;
 };
 
-export const updateTasks = async (data, id) => {
-  const tasks = await prisma.task.findMany({
+export const updateTasksRepository = async (id, data) => {
+  const task = await prisma.task.update({
     where: {
-      userId,
+      id,
+    },
+    data,
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      user: true,
+      completed: true,
+      createdAt: true,
+      userId: true,
     },
   });
-  return tasks;
+  return task;
+};
+
+export const deleteTaskRepository = async (id) => {
+  const task = await prisma.task.delete({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      user: true,
+      userId: true,
+    },
+  });
+  return task;
 };
