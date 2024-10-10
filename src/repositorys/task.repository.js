@@ -16,3 +16,21 @@ export const createTaskRepositorry = async (data) => {
 
   return task;
 };
+
+export const getAllTasksByUserId = async (userId) => {
+  const tasks = await prisma.task.findMany({
+    where: {
+      userId,
+    },
+  });
+  return tasks;
+};
+
+export const updateTasks = async (data, id) => {
+  const tasks = await prisma.task.findMany({
+    where: {
+      userId,
+    },
+  });
+  return tasks;
+};
