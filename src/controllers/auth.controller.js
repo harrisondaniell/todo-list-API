@@ -2,6 +2,7 @@ import JWT from "jsonwebtoken";
 import "dotenv/config";
 import {
   findUserByEmail,
+  tokenGenerate,
   validatePassword,
 } from "../services/user.services.js";
 
@@ -21,11 +22,7 @@ export const login = async (req, res) => {
         throw new Error("Erro ao válidar credenciais");
       }
 
-      const token = JWT.sign(
-        { id: user.id, email: user.email },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: "2h" }
-      );
+      const token = tokenGenerate(user.id, user.email);
 
       res.json({ status: true, token });
     }
