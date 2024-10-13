@@ -1,6 +1,6 @@
 import { prisma } from "../services/prisma.js";
 
-export const createTaskRepositorry = async (data) => {
+export const createTaskRepository = async (data) => {
   const task = await prisma.task.create({
     data,
     select: {
