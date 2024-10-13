@@ -1,5 +1,3 @@
-import JWT from "jsonwebtoken";
-import "dotenv/config";
 import {
   findUserByEmail,
   tokenGenerate,
